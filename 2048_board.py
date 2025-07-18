@@ -1,8 +1,8 @@
 import wx
 
-class MyFrame(wx.Frame):
+class game_board(wx.Frame):
     def __init__(self, *args, **kw):
-        super(MyFrame, self).__init__(*args, **kw)
+        super(game_board, self).__init__(*args, **kw)
 
         self.panel = wx.Panel(self)
 
@@ -38,5 +38,5 @@ class MyFrame(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App(False)
-    frame = MyFrame(None, title="2048 Game")
+    frame = game_board(None, title="2048 Game")
     app.MainLoop()
