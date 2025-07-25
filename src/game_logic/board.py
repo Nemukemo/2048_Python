@@ -45,7 +45,13 @@ class BoardData:
         
 
     def set_tile(self, row: int, col: int, value: int):
-        pass
+        # Check bounds explicitly before accessing
+        if row < 0 or row >= self.size or col < 0 or col >= self.size:
+            print("領域外のポイントへの移動を検知しました。")
+            return False
+        
+        self.grid[row][col] = value
+        return True
         
 
     def get_empty_cells(self):
@@ -92,26 +98,26 @@ if __name__ == "__main__":
 
 
     # # テスト: 数字の設定
-    # print("\n 数字の設定テスト")
-    # print("位置(0,0)に2を設定")
-    # board.set_tile(0, 0, 2)
-    # print("位置(1,1)に4を設定")
-    # board.set_tile(1, 1, 4)
-    # print("位置(2,3)に8を設定")
-    # board.set_tile(2, 3, 8)
-    # print("位置(3,2)に16を設定")
-    # board.set_tile(3, 2, 16)
-    # print("数字設定後のボード:")
-    # board.print_board()
+    print("\n 数字の設定テスト")
+    print("位置(0,0)に2を設定")
+    board.set_tile(0, 0, 2)
+    print("位置(1,1)に4を設定")
+    board.set_tile(1, 1, 4)
+    print("位置(2,3)に8を設定")
+    board.set_tile(2, 3, 8)
+    print("位置(3,2)に16を設定")
+    board.set_tile(3, 2, 16)
+    print("数字設定後のボード:")
+    board.print_board()
     
-    # # テスト: 範囲外の設定テスト
-    # print("\n範囲外の設定テスト")
-    # result1 = board.set_tile(-1, 0, 32)  # 範囲外
-    # result2 = board.set_tile(4, 4, 64)   # 範囲外
-    # result3 = board.set_tile(0, 1, 128)  # 正常
-    # print(f"(-1,0)に32を設定: {result1} (False であるべき)")
-    # print(f"(4,4)に64を設定: {result2} (False であるべき)")
-    # print(f"(0,1)に128を設定: {result3} (True であるべき)")
+    # テスト: 範囲外の設定テスト
+    print("\n範囲外の設定テスト")
+    result1 = board.set_tile(-1, 0, 32)  # 範囲外
+    result2 = board.set_tile(4, 4, 64)   # 範囲外
+    result3 = board.set_tile(0, 1, 128)  # 正常
+    print(f"(-1,0)に32を設定: {result1} (False であるべき)")
+    print(f"(4,4)に64を設定: {result2} (False であるべき)")
+    print(f"(0,1)に128を設定: {result3} (True であるべき)")
     
     # print("\n最終的なボード:")
     # board.print_board()
