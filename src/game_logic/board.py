@@ -1,4 +1,5 @@
 import random
+import math
 class BoardData:
     def __init__(self, size=4):
         '''数字の初期設定(0埋め)'''
@@ -46,6 +47,9 @@ class BoardData:
 
     def set_tile(self, row: int, col: int, value: int):
         # Check bounds explicitly before accessing
+        if not self.num_check(value):
+            print("無効な数字です。2のべき乗を設定してください。")
+            return False
         if row < 0 or row >= self.size or col < 0 or col >= self.size:
             print("領域外のポイントへの移動を検知しました。")
             return False
@@ -62,8 +66,17 @@ class BoardData:
                     empty_cells.append((i,j))
         return empty_cells
     
-    # def num_check(self,num:int):
-    #     if 
+    def num_check(self,num:int):
+        if num < 0:
+            print("負の数は設定できません。")
+            return False
+        
+        return math.log2(num).is_integer()
+
+        
+        
+
+
         
 if __name__ == "__main__":
     # BoardDataクラスのテストコード
@@ -99,8 +112,8 @@ if __name__ == "__main__":
 
     # # テスト: 数字の設定
     print("\n 数字の設定テスト")
-    print("位置(0,0)に2を設定")
-    board.set_tile(0, 0, 2)
+    print("位置(0,4)に2を設定")
+    board.set_tile(0, 3, 2)
     print("位置(1,1)に4を設定")
     board.set_tile(1, 1, 4)
     print("位置(2,3)に8を設定")
@@ -119,17 +132,18 @@ if __name__ == "__main__":
     print(f"(4,4)に64を設定: {result2} (False であるべき)")
     print(f"(0,1)に128を設定: {result3} (True であるべき)")
     
-    # print("\n最終的なボード:")
-    # board.print_board()
-    
-    # # テスト6: 大きな数字のテスト
-    # print("6. 大きな数字のテスト")
-    # board.set_tile(3, 3, 2048)
-    # print("位置(3,3)に2048を設定:")
-    # board.print_board()
+    #  テスト: 大きな数字のテスト
+    print("\n 大きな数字のテスト")
+    board.set_tile(3, 3, 2048)
+    print("位置(3,3)に2048を設定:")
+    board.print_board()
 
-    
+    # テスト:　数字の整合性
+    print("\n数字の整合性テスト")
+    print("位置(0,0)に3を設定:")
+    board.set_tile(0, 0, 3)
+    print("3を設定した後のボード:")
+    board.print_board()
 
-    
-    # print("=== テスト完了 ===")
-    # print(f"ボードは数字を正常に保持できています！")
+    print("=== テスト完了 ===")
+    print(f"ボードは数字を正常に保持できています！")
