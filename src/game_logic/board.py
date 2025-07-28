@@ -28,7 +28,7 @@ class BoardData:
         '''
 
         # 2 or 4の選定
-        tile = random.choice([2, 4])
+        tile = random.choices([2, 4], weights=[90, 10])[0]
 
         # 空いている位置から数字をランダムに配置する
         empty_cell_list=self.get_empty_cells()
