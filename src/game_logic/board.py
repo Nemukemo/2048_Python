@@ -41,12 +41,7 @@ class BoardData:
         '''
         ボードの数字一覧を返す
         '''
-        result_lists=[]
-        for i in range(self.size):
-            for j in range(self.size):
-                result_lists.append(self.grid[i][j])
-        return result_lists
-            
+        return self.grid            
         
 
     def set_tile(self, row: int, col: int, value: int):
