@@ -1,4 +1,5 @@
 import board
+import scoring
 
 def move_board(board, direction: str) -> bool:
     """
@@ -44,6 +45,7 @@ def move_board(board, direction: str) -> bool:
 def merge_line(line):
     """
     1列の処理：数字を詰めて、マージして、新しい列と変更有無を返す。
+    マージされた値はスコアに加算される。
     """
     new_line = [num for num in line if num != 0]
     merged_line = []
@@ -56,7 +58,10 @@ def merge_line(line):
             continue
 
         if i + 1 < len(new_line) and new_line[i] == new_line[i + 1]:
-            merged_line.append(new_line[i] * 2)
+            merged_value = new_line[i] * 2
+            merged_line.append(merged_value)
+            # マージされた値をスコアに加算
+            scoring.add_score(merged_value)
             skip = True
             changed = True
         else:
