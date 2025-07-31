@@ -1,6 +1,6 @@
-import board
-import movement
-import scoring
+from . import board
+from . import movement
+from . import scoring
 import msvcrt  # Windowsのキーボード入力
 import time
 
@@ -84,7 +84,7 @@ class GameManager:
         directions = ['up', 'down', 'left', 'right']
         for direction in directions:
             # 一時的にボードをコピーして移動テスト
-            test_board = board.BoardData()
+            test_board = board.BoardData(size=self.board.size)
             test_board.grid = [row[:] for row in self.board.grid]
             if movement.move_board(test_board, direction):
                 # 移動可能だった場合、ゲーム継続
