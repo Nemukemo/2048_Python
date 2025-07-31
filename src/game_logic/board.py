@@ -12,8 +12,13 @@ class BoardData:
         '''
         for i in range(self.size):
             for j in range(self.size):
-                print(self.grid[i][j], end=' , ')
+                if self.grid[i][j] == 0:
+                    print('・', end='  ')
+                else:
+                    print(self.grid[i][j], end='  ')
             print()
+
+        
 
     def spawn_tile(self):
         '''
@@ -23,8 +28,7 @@ class BoardData:
         '''
 
         # 2 or 4の選定
-        random_list=[2,4]
-        tile = random_list[random.randint(0,1)]
+        tile = random.choices([2, 4], weights=[90, 10])[0]
 
         # 空いている位置から数字をランダムに配置する
         empty_cell_list=self.get_empty_cells()
@@ -37,12 +41,7 @@ class BoardData:
         '''
         ボードの数字一覧を返す
         '''
-        result_lists=[]
-        for i in range(self.size):
-            for j in range(self.size):
-                result_lists.append(self.grid[i][j])
-        return result_lists
-            
+        return self.grid            
         
 
     def set_tile(self, row: int, col: int, value: int):
@@ -55,6 +54,7 @@ class BoardData:
             return False
         
         self.grid[row][col] = value
+        print(f"位置({row},{col})に{value}を設定しました。")
         return True
         
 
@@ -66,12 +66,16 @@ class BoardData:
                     empty_cells.append((i,j))
         return empty_cells
     
-    def num_check(self,num:int):
-        if num < 0:
-            print("負の数は設定できません。")
+    def num_check(self, num: int):
+        if num <= 0:
+            print("正の数のみ設定可能です。")
             return False
-        
-        return math.log2(num).is_integer()
+        try:
+            return math.log2(num).is_integer()
+        except ValueError:
+            print("無効な数値です。")
+            return False
+
 
         
         
