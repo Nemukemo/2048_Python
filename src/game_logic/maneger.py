@@ -84,13 +84,11 @@ class GameManager:
         directions = ['up', 'down', 'left', 'right']
         for direction in directions:
             # 一時的にボードをコピーして移動テスト
-            original_grid = [row[:] for row in self.board.grid]
-            if movement.move_board(self.board, direction):
-                # 移動可能だった場合、元に戻してゲーム継続
-                self.board.grid = original_grid
+            test_board = board.BoardData()
+            test_board.grid = [row[:] for row in self.board.grid]
+            if movement.move_board(test_board, direction):
+                # 移動可能だった場合、ゲーム継続
                 return False
-            # 元に戻す
-            self.board.grid = original_grid
         
         # どの方向にも移動できない場合はゲーム終了
         return True
