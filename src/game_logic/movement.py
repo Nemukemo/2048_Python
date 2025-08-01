@@ -1,7 +1,7 @@
-import board
-import scoring
+from . import board
+from . import scoring
 
-def move_board(board, direction: str) -> bool:
+def move_board(game_board, direction: str) -> bool:
     """
     指定された方向に盤面を移動・マージする。
     盤面に変化があった場合は True、なかった場合は False を返す。
@@ -12,14 +12,14 @@ def move_board(board, direction: str) -> bool:
 
     moved = False
 
-    # 方向ごとに board.grid を操作
-    for i in range(board.size):
+    # 方向ごとに game_board.grid を操作
+    for i in range(game_board.size):
         # 各行または列を抽出
         line = []
         if direction in ("left", "right"):
-            line = board.grid[i][:]
+            line = game_board.grid[i][:]
         else:
-            line = [board.grid[j][i] for j in range(board.size)]
+            line = [game_board.grid[j][i] for j in range(game_board.size)]
 
         if direction in ("right", "down"):
             line.reverse()
@@ -33,11 +33,11 @@ def move_board(board, direction: str) -> bool:
             new_line.reverse()
 
         # 更新
-        for j in range(board.size):
+        for j in range(game_board.size):
             if direction in ("left", "right"):
-                board.grid[i][j] = new_line[j]
+                game_board.grid[i][j] = new_line[j]
             else:
-                board.grid[j][i] = new_line[j]
+                game_board.grid[j][i] = new_line[j]
 
     return moved
 
